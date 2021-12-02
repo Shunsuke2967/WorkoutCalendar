@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WorkoutColender</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div class="app-title navbar navbar-expand-md navbar-light bg-light">
+      <div class="navbar-brand">
+        WorkoutColender
+      </div>
+    </div>
+    <div class="container">
+      <% if flash.notice.present? %>
+        <div class="alert alert-success">
+          <%= flash.notice %>
+        </div>
+      <% end %>
+      <%= yield %>
+    </div>
+  </body>
+</html>
