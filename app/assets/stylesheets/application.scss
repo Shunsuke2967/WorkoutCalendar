@@ -15,7 +15,17 @@
  */
 @import "bootstrap";
 @import "simple_calendar";
-@import "colenders";
+@import "calendars";
+
+html{
+  font-size: 100%;
+}
+
+body{
+  font-family: "Yu Gothic Medium","游ゴシック Medium",YuGothic,"游ゴシック体","ヒラギノ角ゴ Pro W3",sans-serif;
+  line-height: 1.7;
+  font-family: 'Hina Mincho',serif;
+}
 
 .simple-calendar {
   .day {
@@ -56,10 +66,48 @@ a {
 }
 
 .btn {
-  margin-left: 10px;
+  // margin-left: 10px;
+  margin-top: 15px;
 }
 
 .calendar-heading{
   text-align: center;
   font-size: 40px;
+}
+
+.navbar {
+  margin-bottom: 30px;
+}
+
+.navbar-collapse{
+  justify-content: flex-end;
+}
+
+.link {
+  text-decoration: none;
+  color: white ; 
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.navbar-toggler:focus {
+  text-decoration: none;
+  outline: 0;
+  box-shadow: none;
+}
+
+.navbar-dark .navbar-toggler {
+  color: initial;
+  border-color: rgba(167, 164, 164, 0.705);
+}
+
+.container{
+  max-width: 1400px;
+}
+
+@media (max-width: 600px){
+  .calendar-heading {
+    font-size: 25px;
+  }
+
 }

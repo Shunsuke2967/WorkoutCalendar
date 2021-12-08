@@ -1,0 +1,20 @@
+<h1><%= current_user.name %></h1>
+
+<%= form_with model: current_user, local: true do |f| %>
+  <div class='form-group'>
+    <%= f.label :benchpress, 'ベンチプレス' %>
+    <%= f.number_field :benchpress, :placeholder => "単位：kg" ,class: 'form-control max' , step: "0.1" %>
+    <%= f.label :benchpress, 'kg' %>
+  </div>
+  <div class='form-group'>
+    <%= f.label :squat, 'スクワット　' %>
+    <%= f.number_field :squat, :placeholder => "単位：kg" , class: 'form-control max' , step: "0.1" %>
+    <%= f.label :squat, 'kg' %>
+  </div>
+  <div class='form-group'>
+    <%= f.label :deadlift, 'デッドリフト' %>
+    <%= f.number_field :deadlift, :placeholder => "単位：kg" , class: 'form-control max' , step: "0.1" %>
+    <%= f.label :deadlift, 'kg' %>
+  </div>
+  <%= f.submit "更新", class: 'btn btn-primary' %>
+<% end %>

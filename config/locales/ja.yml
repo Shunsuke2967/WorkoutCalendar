@@ -8,9 +8,9 @@ ja:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
     models:
-      colender: カレンダー
+      calendar: カレンダー
     attributes:
-      colender:
+      calendar:
         start_time: 日時
         title: タイトル
         memo: メモ

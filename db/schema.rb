@@ -10,18 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_01_004146) do
+ActiveRecord::Schema.define(version: 2021_12_07_084750) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "colenders", force: :cascade do |t|
+  create_table "calendars", force: :cascade do |t|
     t.string "title", null: false
-    t.string "memo"
+    t.text "memo"
     t.boolean "workouted", default: false, null: false
     t.datetime "start_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_calendars_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "email", null: false
+    t.float "benchpress", default: 0.0, null: false
+    t.float "squat", default: 0.0, null: false
+    t.float "deadlift", default: 0.0, null: false
+    t.string "password_digest", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "benchpress_update", default: -> { "now()" }, null: false
+    t.datetime "squat_update", default: -> { "now()" }, null: false
+    t.datetime "deadlift_update", default: -> { "now()" }, null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
 end

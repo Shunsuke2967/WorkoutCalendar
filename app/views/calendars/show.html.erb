@@ -1,0 +1,33 @@
+<h1>メモ詳細</h1>
+<div class="nav justify-content-end">
+  <%= link_to 'HOME', calendars_path, class: 'nav-link' %>
+</div>
+<table class="table table-hover">
+  <tbody>
+    <tr>
+      <th>日時</th>
+      <td><%= @calendar.start_time.strftime("%Y年%m月%d日") %></td>
+    </tr>
+    <tr>
+      <th>タイトル</th>
+      <td><%= @calendar.title %></td>
+    </tr>
+    <tr>
+      <th>メモ</th>
+      <td><%= simple_format(h(@calendar.memo), {}, sanitize: false, wrapper_tag: "div") %></td>
+    </tr>
+    <tr>
+      <th>筋トレ頑張り度</th>
+      <% if @calendar.workouted %>
+        <td>完了</td>
+      <% else %>
+        <td>未完了</td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
+
+<div class="nav justify-content-end">
+  <%= link_to '編集', edit_calendar_path(@calendar), class: 'btn btn-primary mr-3' %>
+  <%= link_to '削除', @calendar, method: :delete, data: {confirm: "この内容「#{@calendar.title}」を削除します。よろしいですか？"},class: 'btn btn-danger' %>
+</div>

@@ -1,19 +1,18 @@
 <div>
-<p>
-現在MAX記録<br>
-スクワット　：200kg(更新日：2021年12月5日)<br>
-ベンチプレス：150kg(更新日：2021年12月5日)<br>
-デッドリフト：170kg(更新日：2021年12月5日)
-
-</p>
-<% if @colender.errors.present? %>
+  <div>現在MAX記録</div>
+  <div>スクワット　：<%= current_user.squat %>kg</div><div>(更新日：<%= current_user.squat_update.to_s(:datetime_jp) %>)</div>
+  <div>ベンチプレス：<%= current_user.benchpress %>kg</div><div>(更新日：<%= current_user.benchpress_update.to_s(:datetime_jp) %>)</div>
+  <div>デッドリフト：<%= current_user.deadlift %>kg</div><div>(更新日：<%= current_user.deadlift_update.to_s(:datetime_jp) %>)</div>
+</div>
+<% if @calendar.errors.present? %>
   <ul id="error_explanation">
-    <% @colender.errors.full_messages.each do |message| %>
+    <% @calendar.errors.full_messages.each do |message| %>
       <li><%= message %></li>
     <% end %>
   </ul>
 <% end %>
-<%= form_with model: @colender, local: true do |f| %>
+<div class="mb-3"></div>
+<%= form_with model: @calendar, local: true do |f| %>
   <div class="time">
     <%= f.label :start_time, class: 'control-label' %>
     <%= f.date_field :start_time, value: Date.today.strftime("%Y-%m-%d"), class: 'form-control' %>
@@ -32,16 +31,15 @@
   </div>
   <%= f.submit "記録", class: 'btn btn-primary' %>
 <% end %>
-<%= month_calendar events: @colenders do |date, events| %>
+<%= month_calendar events: @calendars do |date, events| %>
   <%= date.day %>
   <% events.each do |event| %>
     <div>
       <% if event.workouted %>
-      <del><%= link_to "#{event.title}", colender_path(event), class: 'nav-link' %></del>
+      <del><%= link_to "#{event.title}", calendar_path(event), class: 'nav-link' %></del>
       <% else %>
-      <%= link_to "#{event.title}", colender_path(event), class: 'nav-link' %>
+      <%= link_to "#{event.title}", calendar_path(event), class: 'nav-link' %>
       <% end %>
     </div>
   <% end %>
 <% end %>
-</div>

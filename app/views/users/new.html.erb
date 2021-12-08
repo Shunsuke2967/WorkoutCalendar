@@ -1,0 +1,37 @@
+<h1>サインアップ</h1>
+
+<%= form_with model: @user, local: true do |f| %>
+    <div class='form-group'>
+    <%= f.label :name%>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+  <div class='form-group'>
+    <%= f.label :email%>
+    <%= f.text_field :email, class: 'form-control' %>
+  </div>
+  <div class='form-group'>
+    <%= f.label :password , 'パスワード' %>
+    <%= f.password_field :password, class: 'form-control' %>
+  </div>
+  <div class='form-group'>
+    <%= f.label :password_confirmation, 'パスワード(確認)' %>
+    <%= f.password_field :password_confirmation, class: 'form-control' %>
+  </div>
+
+  <div class='form-group'>
+    <%= f.label :benchpress, 'ベンチプレス' %>
+    <%= f.number_field :benchpress, :placeholder => "単位：kg" ,class: 'form-control max' , step: "0.1" %>
+    <%= f.label :benchpress, 'kg' %>
+  </div>
+  <div class='form-group'>
+    <%= f.label :squat, 'スクワット　' %>
+    <%= f.number_field :squat, :placeholder => "単位：kg" , class: 'form-control max' , step: "0.1" %>
+    <%= f.label :squat, 'kg' %>
+  </div>
+  <div class='form-group'>
+    <%= f.label :deadlift, 'デッドリフト' %>
+    <%= f.number_field :deadlift, :placeholder => "単位：kg" , class: 'form-control max' , step: "0.1" %>
+    <%= f.label :deadlift, 'kg' %>
+  </div>
+  <%= f.submit "サインアップ", class: 'btn btn-primary' %>
+<% end %>

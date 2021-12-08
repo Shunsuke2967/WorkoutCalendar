@@ -1,9 +1,9 @@
 <h1>編集</h1>
 
-<%= form_with model: @colender, local: true do |f| %>
+<%= form_with model: @calendar, local: true do |f| %>
     <div class='form-group'>
     <%= f.label :start_time %><br>
-    <%= @colender.start_time.strftime("%Y年%m月%d日") %>
+    <%= @calendar.start_time.strftime("%Y年%m月%d日") %>
   </div>
     <div class='form-group'>
     <%= f.label :title %>
@@ -14,7 +14,7 @@
     <%= f.text_area :memo, class: 'form-control', id: 'colender_memo' %>
   </div>
     <div class='form-check'>
-    <% if @colender.workouted %>
+    <% if @calendar.workouted %>
       <%= f.check_box :workouted, {checked: true}, "true", "false" %>
     <% else %>
       <%= f.check_box :workouted, {checked: false}, "true", "false" %>
