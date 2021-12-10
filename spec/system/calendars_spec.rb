@@ -3,10 +3,10 @@ require 'rails_helper'
 describe 'カレンダー管理機能', type: :system, js: true do
   describe 'カレンダー表示機能' do
     before do
-      user_a = FactoryBot.create(:user, name: 'ユーザーA',email: 'a@email.com',password: 'password',benchpress: 10,squat: 50,deadlift: 100 )
+      @user_a = FactoryBot.create(:user, name: 'ユーザーA',email: 'a@email.com',password: 'password',benchpress: 10,squat: 50,deadlift: 100 )
       FactoryBot.create(:user, name: 'ユーザーB',email: 'b@email.com',password: 'password',benchpress: 100,squat: 500,deadlift: 1000 )
-      @calendar_a = FactoryBot.create(:calendar, title: 'テストをします', start_time: Time.now ,memo: 'テスト用メモ', user: user_a )
-      FactoryBot.create(:calendar, title: 'テストをします2', start_time: Time.now.yesterday ,memo: 'テスト用メモ2', workouted: 'true' ,user: user_a )
+      @calendar_a = FactoryBot.create(:calendar, title: 'テストをします', start_time: Time.now ,memo: 'テスト用メモ', user: @user_a )
+      FactoryBot.create(:calendar, title: 'テストをします2', start_time: Time.now.yesterday ,memo: 'テスト用メモ2', workouted: 'true' ,user: @user_a )
     end
 
     context 'ユーザーAがログイン時のアプリの動き' do
@@ -73,6 +73,18 @@ describe 'カレンダー管理機能', type: :system, js: true do
         it 'ユーザーAが未完了のタイトルには線が引かれていない' do
           within '.past.current-month.has-events' do
             expect(page).to have_content 'テストをします'
+          end
+        end
+
+        it 'ユーザーがMAX記録を変更した時間が一覧画面に反映される' do
+          click_button 'navbar-toggler'
+          click_link 'アカウント'
+          fill_in "user_benchpress", with: '500'
+          click_button 'update_button'
+          click_button 'navbar-toggler'
+          click_link 'HOME'
+          within '.benchpress_update' do
+            expect(page).to have_content "(更新日：#{@user_a.squat_update.to_s(:datetime_jp)})"
           end
         end
 
@@ -145,6 +157,13 @@ describe 'カレンダー管理機能', type: :system, js: true do
           expect(page).to have_content '100'
         end
       end
+
+      it 'ユーザーAが今日の日付で作成したタイトルが表示されない' do
+        within '.today' do
+          expect(page).to have_no_content 'テストをします'
+        end
+      end
+
     end
   end
 end

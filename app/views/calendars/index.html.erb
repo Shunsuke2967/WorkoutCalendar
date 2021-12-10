@@ -1,8 +1,8 @@
 <div>
   <div>現在MAX記録</div>
-  <div class="squat_max">スクワット　：<%= current_user.squat %>kg</div><div>(更新日：<%= current_user.squat_update.to_s(:datetime_jp) %>)</div>
-  <div class="benchpress_max">ベンチプレス：<%= current_user.benchpress %>kg</div><div>(更新日：<%= current_user.benchpress_update.to_s(:datetime_jp) %>)</div>
-  <div class="deadlift_max">デッドリフト：<%= current_user.deadlift %>kg</div><div>(更新日：<%= current_user.deadlift_update.to_s(:datetime_jp) %>)</div>
+  <div class="squat_max">スクワット　：<%= current_user.squat %>kg</div><div class= "squat_update">(更新日：<%= current_user.squat_update.to_s(:datetime_jp) %>)</div>
+  <div class="benchpress_max">ベンチプレス：<%= current_user.benchpress %>kg</div><div class= "benchpress_update">(更新日：<%= current_user.benchpress_update.to_s(:datetime_jp) %>)</div>
+  <div class="deadlift_max">デッドリフト：<%= current_user.deadlift %>kg</div><div class= "deadlift_update">(更新日：<%= current_user.deadlift_update.to_s(:datetime_jp) %>)</div>
 </div>
 <% if @calendar.errors.present? %>
   <ul id="error_explanation">
