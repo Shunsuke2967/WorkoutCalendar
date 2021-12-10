@@ -20,13 +20,13 @@ describe 'カレンダー管理機能', type: :system, js: true do
       end
 
       it 'ユーザーAが登録しているMAX記録が表示されている' do
-        within '#benchpress_max' do
+        within '.benchpress_max' do
           expect(page).to have_content '10'
         end
-        within '#squat_max' do
+        within '.squat_max' do
           expect(page).to have_content '50'
         end
-        within '#deadlift_max' do
+        within '.deadlift_max' do
           expect(page).to have_content '100'
         end
       end
