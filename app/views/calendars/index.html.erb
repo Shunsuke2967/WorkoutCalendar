@@ -36,7 +36,7 @@
   <% events.each do |event| %>
     <div>
       <% if event.workouted %>
-      <del><%= link_to "#{event.title}", calendar_path(event), class: 'nav-link' %></del>
+      <del id="del"><%= link_to "#{event.title}", calendar_path(event), class: 'nav-link' %></del>
       <% else %>
       <%= link_to "#{event.title}", calendar_path(event), class: 'nav-link' %>
       <% end %>
