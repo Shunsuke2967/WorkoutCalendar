@@ -14,9 +14,14 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'capybara/rspec'
+require 'selenium-webdriver'
+require 'webdrivers'
+
+Selenium::WebDriver::Chrome::Service.driver_path = "/home/shunsuke/デスクトップ/chromedriver_linux64/chromedriver"
+
 RSpec.configure do |config|
   config.before(:each, type: :system) do
-    driven_by :selenium_chrome_headless
+    driven_by :selenium_chrome_headless, using: :headless_chrome
   end
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
