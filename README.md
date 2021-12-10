@@ -12,3 +12,6 @@
 - 筋トレ記録更新機能
 - youtubeの検索機能(YOUTUBEAPIを使用して実装予定)
 # テスト
+Rspec(System Test)
+- Capybara
+- FactoryBot
