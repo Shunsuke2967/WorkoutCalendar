@@ -21,6 +21,14 @@ describe 'カレンダー管理機能', type: :system, js: true do
         expect(page).to have_content 'ログインしました。'
       end
 
+      it 'ユーザーAがログアウトしたらログアウトしましたと表示される' do
+        click_button 'navbar-toggler'
+        page.accept_confirm do
+          click_on :delete_button
+        end
+        expect(page).to have_content 'ログアウトしました。'
+      end
+
       it 'ユーザーAが登録しているMAX記録が表示されている' do
         within '.benchpress_max' do
           expect(page).to have_content '10'
@@ -58,6 +66,18 @@ describe 'カレンダー管理機能', type: :system, js: true do
         fill_in "session_email", with: 'b@email.com'
         fill_in "session_password", with: 'password'
         click_button 'session_button'
+      end
+
+      it 'ユーザーAが登録しているMAX記録は表示されない' do
+        within '.benchpress_max' do
+          expect(page).to have_content '10'
+        end
+        within '.squat_max' do
+          expect(page).to have_content '50'
+        end
+        within '.deadlift_max' do
+          expect(page).to have_content '100'
+        end
       end
     end
   end
