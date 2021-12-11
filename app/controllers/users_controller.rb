@@ -2,6 +2,23 @@ class UsersController < ApplicationController
 
   skip_before_action :login_required
 
+  GOOGLE_API_KEY = Rails.application.credentials.google[:api_key]
+
+  def find_videos(keyword)
+    service = Google::Apis::YoutubeV3::YouTubeService.new
+    service.key = GOOGLE_API_KEY
+
+    next_page_token = nil
+    opt = {
+      q: keyword,
+      type: 'video',
+      max_results: 7,
+      order: "viewCount",
+      page_token: next_page_token,
+    }
+    service.list_searches(:snippet, opt)
+  end
+
   def index
   end
 
@@ -28,6 +45,13 @@ class UsersController < ApplicationController
       redirect_to user_path(current_user), notice: "MAXを更新しました。"
     end
   end
+
+  def show
+    if params[:search].present?
+      @youtube_data = find_videos(params[:search])
+    end
+  end
+
 
 
 

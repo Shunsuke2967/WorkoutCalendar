@@ -43,4 +43,5 @@ class CalendarsController < ApplicationController
   def calendar_params
     params.require(:calendar).permit(:title,:memo,:workouted,:start_time)
   end
+
 end
