@@ -9,12 +9,22 @@ ja:
           has_many: "%{record}が存在しているので削除できません"
     models:
       calendar: カレンダー
+      user: ユーザー
     attributes:
       calendar:
         start_time: 日時
         title: タイトル
         memo: メモ
         workouted: 完了
+      user:
+        name: 名前
+        email: メールアドレス
+        benchpress: ベンチプレス
+        squat: スクワット
+        deadlift: デッドリフト
+        password: パスワード
+        password_confirmation: パスワード(確認)
+
   date:
     abbr_day_names:
     - 日
