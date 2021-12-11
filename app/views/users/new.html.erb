@@ -26,6 +26,9 @@
     <%= f.password_field :password_confirmation, class: 'form-control' %>
   </div>
   <div class="mb-3"></div>
+  <p>現在の1RMの記録を入力してください<br>
+    (後から変更可能です)
+  </p>
   <div class='form-group'>
     <%= f.label :benchpress %>
     <%= f.number_field :benchpress, :placeholder => "単位：kg" ,class: 'form-control max' , step: "0.1" %>

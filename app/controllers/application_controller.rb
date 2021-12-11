@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   private
 
   def login_required
-    redirect_to users_path unless current_user
+    redirect_to new_user_path unless current_user
   end
 
   def current_user

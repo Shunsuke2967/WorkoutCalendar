@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: "calendars#index"
   resources :calendars
 
-  resources :users , only: [:index, :new, :create, :show,:update]
+  resources :users , only: [:new, :create, :show,:update]
 
   get 'sessions/new'
   post 'sessions/new' , to: 'sessions#create'

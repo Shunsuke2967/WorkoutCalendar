@@ -19,9 +19,6 @@ class UsersController < ApplicationController
     service.list_searches(:snippet, opt)
   end
 
-  def index
-  end
-
   def new
     @user =User.new
   end
