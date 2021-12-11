@@ -2,8 +2,8 @@ class UsersController < ApplicationController
 
   skip_before_action :login_required
 
-  GOOGLE_API_KEY = Rails.application.credentials.google[:api_key]
-
+  # GOOGLE_API_KEY = Rails.application.credentials.google[:api_key]
+  GOOGLE_API_KEY = 'AIzaSyCRnvblYzbYxrcjOGCY_I3jO5mLGcC6whU'
   def find_videos(keyword)
     service = Google::Apis::YoutubeV3::YouTubeService.new
     service.key = GOOGLE_API_KEY
