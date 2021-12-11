@@ -1,7 +1,7 @@
 # WorkoutCalendar
 毎日の筋トレの記録やメモをカレンダーに記録できるアプリです。<br>
 herokuに上げています
-サンプルユーザーですこれでログインしてください。
+サンプルユーザーを用意しているので下記を使用してログインしてください。
 - メールアドレス: test1@email.com
 - パスワード    : password
 - url           : https://workoutcalendar1234.herokuapp.com/sessions/new
