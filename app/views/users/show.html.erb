@@ -27,7 +27,7 @@
     <div class='input-group'>
       <%= text_field_tag :search, params[:search], placeholder: "キーワード検索", class: "form-control" %>
       <span class="input-group-btn">
-        <%= button_tag "検索", :name => nil, class: "btn btn-primary" %>
+        <%= button_tag "検索", :name => nil, class: "btn btn-primary", id: "search_button" %>
       </span>
     </div>
   <% end %>
@@ -35,7 +35,7 @@
   <% if @youtube_data.present? %>
     <% @youtube_data.items.each do |item| %>
       <% snippet = item.snippet %>
-      <div><iframe src="https://www.youtube.com/embed/<%= item.id.video_id %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+      <div class="youtube-css"><iframe src="https://www.youtube.com/embed/<%= item.id.video_id %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
     <% end %>
   <% end %>
   <div class="mb-5"></div>

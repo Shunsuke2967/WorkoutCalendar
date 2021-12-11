@@ -32,6 +32,8 @@ describe 'カレンダー管理機能', type: :system, js: true do
       end
 
       context 'ユーザーAがログインしているときのカレンダー一覧画面機能' do
+
+
         it 'ユーザーAが登録しているMAX記録が表示されている' do
           within '.benchpress_max' do
             expect(page).to have_content '10'
@@ -129,12 +131,25 @@ describe 'カレンダー管理機能', type: :system, js: true do
           end
         end
 
-        it 'ユーザーAがMAX記録の値を変更して、更新ボタンを押すと更新しましたと表示される' do
-          fill_in "user_benchpress", with: '500'
-          click_button 'update_button'
-          expect(page).to have_content "更新しました"
-        end
+        context 'YOUTUBE検索機能' do
+          it 'ユーザーAがMAX記録の値を変更して、更新ボタンを押すと更新しましたと表示される' do
+            fill_in "user_benchpress", with: '500'
+            click_button 'update_button'
+            expect(page).to have_content "更新しました"
+          end
 
+          it '検索したあと検索したYOUTUBEが表示されている' do
+            fill_in "search", with: '筋肉'
+            click_button 'search_button'
+            expect(page).to have_css('.youtube-css')
+          end
+
+          it 'なにも検索しなかった場合YOUTUBEが表示されない' do
+            fill_in "search", with: ''
+            click_button 'search_button'
+            expect(page).to have_no_css('.youtube-css')
+          end
+        end
       end
     end
 
@@ -163,7 +178,6 @@ describe 'カレンダー管理機能', type: :system, js: true do
           expect(page).to have_no_content 'テストをします'
         end
       end
-
     end
   end
 end
