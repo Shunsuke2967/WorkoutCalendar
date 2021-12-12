@@ -15,6 +15,7 @@ herokuに上げています
 - カレンダー一覧表示、メモ機能(simple-calendar)
 - 筋トレ記録更新機能
 - youtubeの検索機能(YOUTUBEAPIを使用)
+- メール送信機能(Mailer、開発環境)
 # テスト
 Rspec(System Test)
 - Capybara
