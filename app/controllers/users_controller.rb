@@ -25,8 +25,10 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    password = @user.password
 
     if @user.save
+      WorkcalendarMailer.user_create_email(@user,password).deliver_now
       session[:user_id] = @user.id
       redirect_to root_path, notice: 'ログインしました。'
     else
