@@ -23,9 +23,11 @@ class CalendarsController < ApplicationController
   end
 
   def update
-    calendar =current_user.calendar.find(params[:id])
-    if calendar.update(calendar_params)
-      redirect_to calendar_path, notice: "#{calendar.start_time.strftime("%Y年%m月%d日")}のメモを変更しました"
+    @calendar =current_user.calendar.find(params[:id])
+    if @calendar.update(calendar_params)
+      redirect_to calendar_url(@calendar), notice: "#{@calendar.start_time.strftime("%Y年%m月%d日")}のメモを変更しました"
+    else
+      render :edit
     end
   end
 

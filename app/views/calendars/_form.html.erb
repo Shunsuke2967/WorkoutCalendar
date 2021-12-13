@@ -1,0 +1,38 @@
+<% if calendar.errors.present? %>
+  <ul id="error_explanation">
+    <% calendar.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with model: calendar, local: true do |f| %>
+  <% if calendar.persisted? %>
+    <div class='form-group'>
+      <%= f.label :start_time %><br>
+      <%= calendar.start_time.strftime("%Y年%m月%d日") %>
+    </div>
+  <% else %>
+    <div class="time">
+      <%= f.label :start_time, class: 'control-label' %>
+      <%= f.date_field :start_time, value: Date.today.strftime("%Y-%m-%d"), class: 'form-control' %>
+    </div>
+  <% end %>
+  <div class='form-group'>
+    <%= f.label :title %>
+    <%= f.text_field :title, class: 'form-control', id: 'colender_title' %>
+  </div>
+  <div class='form-group'>
+    <%= f.label :memo %>
+    <%= f.text_area :memo, class: 'form-control', id: 'colender_memo' %>
+  </div>
+  <div class='form-check'>
+    <% if @calendar.workouted %>
+      <%= f.check_box :workouted, {checked: true}, "true", "false" %>
+    <% else %>
+      <%= f.check_box :workouted, {checked: false}, "true", "false" %>
+    <% end %>
+    <%= f.label :workouted %>
+  </div>
+  <%= f.submit nil, class: 'btn btn-primary' %>
+<% end %>
