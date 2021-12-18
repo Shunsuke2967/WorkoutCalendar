@@ -1,4 +1,5 @@
 class CalendarsController < ApplicationController
+  before_action :set_current_user_calendar, only: [:show, :edit,:update,:destroy]
   def index
     @calendars = current_user.calendar.all
     @calendar = current_user.calendar.new
@@ -15,15 +16,12 @@ class CalendarsController < ApplicationController
   end
 
   def show
-    @calendar = current_user.calendar.find(params[:id])
   end
 
   def edit
-    @calendar = current_user.calendar.find(params[:id])
   end
 
   def update
-    @calendar =current_user.calendar.find(params[:id])
     if @calendar.update(calendar_params)
       redirect_to calendar_url(@calendar), notice: "#{@calendar.start_time.strftime("%Y年%m月%d日")}のメモを変更しました"
     else
@@ -32,9 +30,8 @@ class CalendarsController < ApplicationController
   end
 
   def destroy
-    calendar =current_user.calendar.find(params[:id])
-    calendar.destroy
-    redirect_to root_path, notice: "#{calendar.start_time.strftime("%Y年%m月%d日")}の#{calendar.title}を削除しました"
+    @calendar.destroy
+    redirect_to root_path, notice: "#{@calendar.start_time.strftime("%Y年%m月%d日")}の#{@calendar.title}を削除しました"
   end
 
 
@@ -46,4 +43,7 @@ class CalendarsController < ApplicationController
     params.require(:calendar).permit(:title,:memo,:workouted,:start_time)
   end
 
+  def set_current_user_calendar
+    @calendar = current_user.calendar.find(params[:id])
+  end
 end
