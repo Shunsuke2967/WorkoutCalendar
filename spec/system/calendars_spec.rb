@@ -5,21 +5,25 @@ describe 'カレンダー管理機能', type: :system, js: true do
     let(:user_b) { FactoryBot.create(:user, name: 'ユーザーB',email: 'b@email.com',password: 'password',benchpress: 100,squat: 500,deadlift: 1000 ) }
     let!(:task1_a) { FactoryBot.create(:calendar, title: 'テストをします', start_time: Time.now ,memo: 'テスト用メモ', user: user_a ) }
     let!(:task2_a) { FactoryBot.create(:calendar, title: 'テストをします2', start_time: Time.now.yesterday ,memo: 'テスト用メモ2', workouted: 'true' ,user: user_a ) }
-  
+    before do
+      visit sessions_new_path
+      fill_in "session_email", with: login_user.email 
+      fill_in "session_password", with: login_user.password
+      click_button 'session_button'
+    end
+
   describe 'ログインログアウト機能' do
     context 'ユーザーAがログインしようとしたとき' do
       let(:login_user){ user_a }
-      before do
-        visit sessions_new_path
-        fill_in "session_email", with: login_user.email 
-        fill_in "session_password", with: login_user.password
-        click_button 'session_button'
-      end
-      
       it 'ユーザーAがログインに成功したときログインしました。と表示される' do
         expect(page).to have_content 'ログインしました。'
       end
-
+      let(:login_user){}
+      it 'ユーザーAがログインに失敗したときログインに失敗しましたと表示される' do
+        expect(page).to have_content 'ログインに失敗しました'
+      end
+    end
+    context 'ユーザーAがログアウトしたとき' do
       it 'ユーザーAがログアウトしたらログアウトしましたと表示される' do
         click_button 'navbar-toggler'
         page.accept_confirm do
@@ -29,6 +33,13 @@ describe 'カレンダー管理機能', type: :system, js: true do
       end
     end
   end
+  describe '新規登録機能' do
+    it '' do
+    end
+    it '' do
+    end
+  end
+
   describe 'ログイン時のカレンダーアプリの機能' do
     before do
       visit sessions_new_path
