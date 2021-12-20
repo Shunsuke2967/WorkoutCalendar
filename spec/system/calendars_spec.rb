@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe 'カレンダー管理機能', type: :system, js: true do
     let(:user_a) { FactoryBot.create(:user, name: 'ユーザーA',email: 'a@email.com',password: 'password',benchpress: 10,squat: 50,deadlift: 100 ) }
+    let(:user_c_build) { FactoryBot.build(:user, name: 'ユーザーC',email: 'c@email.com',password: 'password',benchpress: 10,squat: 50,deadlift: 100 ) }
     let(:user_b) { FactoryBot.create(:user, name: 'ユーザーB',email: 'b@email.com',password: 'password',benchpress: 100,squat: 500,deadlift: 1000 ) }
     let!(:task1_a) { FactoryBot.create(:calendar, title: 'テストをします', start_time: Time.now ,memo: 'テスト用メモ', user: user_a ) }
     let!(:task2_a) { FactoryBot.create(:calendar, title: 'テストをします2', start_time: Time.now.yesterday ,memo: 'テスト用メモ2', workouted: 'true' ,user: user_a ) }
@@ -14,16 +15,21 @@ describe 'カレンダー管理機能', type: :system, js: true do
 
   describe 'ログインログアウト機能' do
     context 'ユーザーAがログインしようとしたとき' do
-      let(:login_user){ user_a }
-      it 'ユーザーAがログインに成功したときログインしました。と表示される' do
-        expect(page).to have_content 'ログインしました。'
+      context 'ログインに成功したとき' do
+        let(:login_user){ user_a }
+        it 'ログインしました。と表示される' do
+          expect(page).to have_content 'ログインしました。'
+        end
       end
-      let(:login_user){}
-      it 'ユーザーAがログインに失敗したときログインに失敗しましたと表示される' do
-        expect(page).to have_content 'ログインに失敗しました'
+      context 'ログインに失敗したとき' do
+        let(:login_user){ user_c_build } 
+        it 'ログインに失敗しましたと表示される' do
+          expect(page).to have_content 'ログインに失敗しました'
+        end
       end
     end
     context 'ユーザーAがログアウトしたとき' do
+      let(:login_user){ user_a }
       it 'ユーザーAがログアウトしたらログアウトしましたと表示される' do
         click_button 'navbar-toggler'
         page.accept_confirm do
@@ -33,20 +39,14 @@ describe 'カレンダー管理機能', type: :system, js: true do
       end
     end
   end
-  describe '新規登録機能' do
-    it '' do
-    end
-    it '' do
-    end
-  end
+#  describe '新規登録機能' do
+#    it '' do
+#    end
+#    it '' do
+#    end
+#  end
 
   describe 'ログイン時のカレンダーアプリの機能' do
-    before do
-      visit sessions_new_path
-      fill_in "session_email", with: login_user.email 
-      fill_in "session_password", with: login_user.password 
-      click_button 'session_button'
-    end
     describe 'カレンダー表示機能' do
       context 'ユーザーAがログイン時の動き' do
         let(:login_user){ user_a }
