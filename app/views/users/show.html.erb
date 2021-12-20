@@ -1,7 +1,7 @@
 <h1><%= current_user.name %></h1>
 
 <%= form_with model: current_user, local: true do |f| %>
-  <div class='form-group benchpress'>
+  <div class='form-group benchpress '>
     <%= f.label :benchpress, 'ベンチプレス' %>
     <%= f.number_field :benchpress, :placeholder => "単位：kg" ,class: 'form-control max' , step: "0.1" %>
     <%= f.label :benchpress, 'kg' %>

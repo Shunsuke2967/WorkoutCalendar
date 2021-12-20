@@ -6,6 +6,7 @@
 </div>
 <div class="mb-3"></div>
 <%= render partial: 'form', locals: { calendar: @calendar } %>
+<div class="" id="pc">
 <%= month_calendar events: @calendars do |date, events| %>
   <%= date.day %>
   <% events.each do |event| %>
@@ -18,3 +19,19 @@
     </div>
   <% end %>
 <% end %>
+</div>
+
+<div class="" id="iphone">
+<%= week_calendar events: @calendars do |date, events| %>
+  <%= date.day %>
+  <% events.each do |event| %>
+    <div>
+      <% if event.workouted %>
+      <del id="del"><%= link_to "#{event.title}", calendar_path(event), class: 'nav-link memolink' %></del>
+      <% else %>
+      <%= link_to "#{event.title}", calendar_path(event), class: 'nav-link memolink' %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
+</div>
