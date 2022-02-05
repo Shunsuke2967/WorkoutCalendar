@@ -6,12 +6,12 @@ describe 'カレンダー管理機能', type: :system, js: true do
     let(:user_b) { FactoryBot.create(:user, name: 'ユーザーB',email: 'b@email.com',password: 'password',benchpress: 100,squat: 500,deadlift: 1000 ) }
     let!(:task1_a) { FactoryBot.create(:calendar, title: 'テストをします', start_time: Time.now ,memo: 'テスト用メモ', user: user_a ) }
     let!(:task2_a) { FactoryBot.create(:calendar, title: 'テストをします2', start_time: Time.now.yesterday ,memo: 'テスト用メモ2', workouted: 'true' ,user: user_a ) }
-    before do
-      visit sessions_new_path
-      fill_in "session_email", with: login_user.email 
-      fill_in "session_password", with: login_user.password
-      click_button 'session_button'
-    end
+  before do    
+    visit sessions_new_path
+    fill_in "session_email", with: login_user.email
+    fill_in "session_password", with: login_user.password
+    click_button 'session_button'
+  end
 
   describe 'ログインログアウト機能' do
     context 'ユーザーAがログインしようとしたとき' do
@@ -21,7 +21,7 @@ describe 'カレンダー管理機能', type: :system, js: true do
           expect(page).to have_content 'ログインしました。'
         end
       end
-      context 'ログインに失敗したとき' do
+      context '登録していないユーザーCを入力してログインしたとき' do
         let(:login_user){ user_c_build } 
         it 'ログインに失敗しましたと表示される' do
           expect(page).to have_content 'ログインに失敗しました'
@@ -39,12 +39,40 @@ describe 'カレンダー管理機能', type: :system, js: true do
       end
     end
   end
-#  describe '新規登録機能' do
-#    it '' do
-#    end
-#    it '' do
-#    end
-#  end
+  describe '新規登録機能' do
+    context '新規登録に成功したとき' do
+      let(:login_user) { user_c_build }
+      it 'ログインしました。と表示される' do
+        click_button 'navbar-toggler'
+        page.accept_confirm do
+          click_link 'サインアップ'
+        end
+        fill_in 'session_name', with: user_c_build.name
+        fill_in 'session_email', with: user_c_build.email
+        fill_in 'session_password', with: user_c_build.password
+        fill_in 'session_password_confirmation', with: user_c_build.password
+        # click_button 'session_button'
+        expect(page).to have_content 'ログインしました。'
+      end
+    end
+    context 'ユーザーAがすでに存在し新規登録に失敗したとき' do
+      let(:login_user) { user_c_build }
+      it '' do
+        click_button 'navbar-toggler'
+        page.accept_confirm do
+          click_link 'サインアップ'
+        end
+
+        visit new_user_path
+        fill_in 'new_name', with: login_user.name
+        fill_in 'new_email', with: login_user.email
+        fill_in 'new_password', with: login_user.password
+        fill_in 'new_password_confirmation', with: login_user.password
+        click_button 'session_button'
+        expect(page).to have_content 'ログインしました。'
+      end
+    end
+  end
 
   describe 'ログイン時のカレンダーアプリの機能' do
     describe 'カレンダー表示機能' do
